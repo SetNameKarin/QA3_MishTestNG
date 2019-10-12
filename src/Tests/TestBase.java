@@ -2,14 +2,21 @@ package Tests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import java.util.List;
+import org.openqa.selenium.By;
 
 public class TestBase {
     WebDriver driver;
+    @AfterMethod
+    public void tearDown(){
+        driver.quit();
+    }
     @BeforeMethod
     public  void  initWebDriver() throws InterruptedException {
         driver = new ChromeDriver();
@@ -21,10 +28,7 @@ public class TestBase {
         waitUntilElementIsClickable(By.id("idsignin"),20);
 
     }
-    @AfterMethod
-    public void tearDown(){
-        driver.quit();
-    }
+
 
     public void waitUntilElementIsVisible(By locator, int time) {
         try {
@@ -45,4 +49,22 @@ public class TestBase {
             e.printStackTrace();
         }
     }
+
+    public void waitUntilElementIsPresent(By locator, int time){
+        try{
+            new WebDriverWait(driver, time)
+                    .until(ExpectedConditions.presenceOfElementLocated(locator));
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    public void waitUntilAllElementsVisible(List<WebElement> listOptions, int time){
+        try{
+            new WebDriverWait(driver, time)
+                    .until(ExpectedConditions.visibilityOfAllElements(listOptions));
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
 }

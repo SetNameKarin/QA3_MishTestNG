@@ -71,7 +71,7 @@ public class LoginPageTests extends TestBase{
 
 
        //---------User is on the HomePage for the unauthorized user------------
-       System.out.println("User is on the HomePage unauthorized: " + driver.findElement(By.id("idsignin")).getText().equals("Login"));
+       //System.out.println("User is on the HomePage unauthorized: " + driver.findElement(By.id("idsignin")).getText().equals("Login"));
        Assert.assertEquals(driver.findElement(By.id("idsignin")).getText(),"Login", "Name of the login button is not 'Login'");
 
 

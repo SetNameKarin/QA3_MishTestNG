@@ -26,13 +26,14 @@ public class ProfilePageTests extends TestBase {
        waitUntilElementIsClickable(By.id("signinrequest"), 20);
 
         driver.findElement(By.id("signinrequest")).click();
-       //Thread.sleep(3000);
-        waitUntilElementIsClickable(By.id("profile"), 20);
+       Thread.sleep(3000);
+        //waitUntilElementIsVisible(By.id("profile"), 30);
+       // waitUntilElementIsClickable(By.id("profile"), 20);
 
-        //--------------Go to the profile-----------  Does not work!!!!!!
+        //--------------Go to the profile-----------
        driver.findElement(By.id("profile")).click();
-       //Thread.sleep(1000);
-       waitUntilElementIsVisible(By.id("profile"), 30);
+       Thread.sleep(2000);
+       //waitUntilElementIsVisible(By.id("titleprofile"),30);
 
     }
 
@@ -41,19 +42,23 @@ public class ProfilePageTests extends TestBase {
 public  void lastNameOfFamilyChanging() throws InterruptedException {
               //--------------Open in edit mode-------------
        driver.findElement(By.id("idbtneditprofile")).click();
-     waitUntilElementIsVisible(By.xpath(" //div[@id='idbtneditavatar']//div//i[@class='fa fa-plus-circle']"), 30);
+       Thread.sleep(2000);
+     //waitUntilElementIsVisible(By.xpath(" //div[@id='idbtneditavatar']//div//i[@class='fa fa-plus-circle']"), 30);
 
         //----------------Enter new Last name------------
         WebElement lastNameField = driver.findElement(By.xpath("//span[@id='fieldobjfamilyName']//input"));
         lastNameField.click();
         lastNameField.clear();
         lastNameField.sendKeys("horosho");
-       // Thread.sleep(2000); What for????????????
+        waitUntilElementIsVisible(By.id("idbtnsaveprofile"), 30);
+        waitUntilElementIsClickable(By.id("idbtnsaveprofile"), 30);
+
 
         //-----------------Save profile-----------
 
         driver.findElement(By.id("idbtnsaveprofile")).click();
-       waitUntilElementIsVisible(By.id("idbtneditprofile"),30);
+       waitUntilElementIsClickable(By.id("idbtneditprofile"),30);
+        waitUntilElementIsVisible(By.xpath("//span[@id = 'fieldobjfamilyName']/a"),20);
 
         /*------------------Testing changes-------------------
         WebElement searchRawLastName = driver.findElement(By.id("fieldobjfamilyName"));
@@ -67,7 +72,10 @@ public  void lastNameOfFamilyChanging() throws InterruptedException {
 
         //---------------Return to the profile---------------
         driver.findElement(By.id("profile")).click();
-        waitUntilElementIsVisible(By.id("idbtneditprofile"),30);
+        Thread.sleep(2000);
+        //waitUntilElementIsVisible(By.id("idbtneditprofile"),30);
+        //waitUntilElementIsClickable(By.id("idbtneditprofile"), 40);
+
 
         //----------------Open in edit mode---------
         driver.findElement(By.id("idbtneditprofile")).click();
@@ -78,12 +86,15 @@ public  void lastNameOfFamilyChanging() throws InterruptedException {
         lastNameField.click();
         lastNameField.clear();
         lastNameField.sendKeys("Shuster");
-        waitUntilElementIsClickable(By.id("idbtneditprofile"),30);
+        waitUntilElementIsVisible(By.id("idbtnsaveprofile"),30);
+        waitUntilElementIsClickable(By.id("idbtnsaveprofile"),30);
+
 
         //-----------------Save profile-----------
 
         driver.findElement(By.id("idbtnsaveprofile")).click();
         waitUntilElementIsVisible(By.id("idbtneditprofile"),30);
+        waitUntilElementIsClickable(By.linkText("Shuster"), 20);
 
         Assert.assertTrue(driver.findElement(By.linkText("Shuster")).isDisplayed(),"There is no an element which can be find be linkText('Shuster')");
 
@@ -93,6 +104,7 @@ public  void lastNameOfFamilyChanging() throws InterruptedException {
 
     @Test
     public void profileAndFamilyPageComparing() throws InterruptedException {
+
          /*---------Find login button and press it -------------
 
         // WebElement loginIcon = driver.findElement(By.xpath("//i[@id='idsignin']"));
@@ -143,12 +155,13 @@ public  void lastNameOfFamilyChanging() throws InterruptedException {
         //Phone number:
         String phoneP = driver.findElement(By.cssSelector("#fieldobjphoneNumber")).getText();
         Thread.sleep(5000);
+        //waitUntilElementIsClickable(By.id("family"), 30);
 
 
         //---------------------Go to the family--------------
-        driver.findElement(By.xpath("//i[@id='family']")).click();
-       // Thread.sleep(5000);
-        waitUntilElementIsVisible(By.xpath("//div[contains(text(),'Member family')]"), 30);
+        driver.findElement(By.id("family")).click();
+       Thread.sleep(5000);
+       // waitUntilElementIsVisible(By.xpath("//div[contains(text(),'Member family')]"), 30);
 
         //----------------------Family info-------------------
         //Confession
@@ -174,7 +187,7 @@ public  void lastNameOfFamilyChanging() throws InterruptedException {
         System.out.println("Email: " + emailP.equals(emailF));
         System.out.println(("Phone number: " + phoneP.equals(phoneF)));
 
-        int counter = 0;
+       int counter = 0;
         if(confessionP.equals(confessionF)){
             counter++;
         }
@@ -193,7 +206,7 @@ public  void lastNameOfFamilyChanging() throws InterruptedException {
 
         Assert.assertEquals(counter, 5);
 
-       /* Assert.assertEquals(confessionP,confessionF, "Confession values are equal");
+      /* Assert.assertEquals(confessionP,confessionF, "Confession values are equal");
         Assert.assertEquals(languageP, languageF, "Language values are equal" );
         Assert.assertEquals(foodP, foodF, "Food values are equal" );
         Assert.assertEquals(emailP, emailF, "Email values are equal" );
