@@ -71,4 +71,40 @@ public class HomePageHelper extends PageBase {
 
         return counter == listHolidays.size();
     }
+
+    public void filterEventsByFoodKosher() {
+        // -----  wait for select-element (filter by food) and all options being loaded ---
+        waitUntilElementIsVisible(By.name("selectfood"),30);
+        waitUntilAllElementsVisible(driver.findElements(By.xpath("//select[@name = 'selectfood']/option")),30);
+
+        // --- get select-element (filter by Kosher)
+        WebElement foodFilter = driver.findElement(By.name("selectfood"));
+
+        // --- verify states clear button ----
+        System.out.println("is displayed: " + driver.findElement(By.xpath("//div[@id='idbtnclearfilter']")).isDisplayed());
+        System.out.println("is enabled: " + driver.findElement(By.xpath("//div[@id='idbtnclearfilter']")).isEnabled());
+
+        // ------ choose filter "kosher" ------
+        Select selector = new Select(foodFilter);
+        selector.selectByValue("Kosher");
+
+        // ------ wait for filter "kosher" being chosen -----
+        waitUntilElementIsClickable(By.xpath("//div[@id='idbtnclearfilter']"),20);
+        waitUntilElementIsPresent(By.xpath("//option[@selected][@value = 'Kosher']"),20);
+        // ------ wait for all events by fiter "kosher" being loaded ----
+        waitUntilAllElementsVisible(driver.findElements(By.xpath("//div[@class = 'itemEventInsert']")),40);
+    }
+
+    public Boolean allEventsBelongToFoodKosher() {
+
+        List<WebElement> listFood = driver.findElements(By.xpath("//div[@class = 'preferenceItemEvents']"));
+        // --- verify that all food values are "Kosher" ----
+        int counter = 0;
+        for (WebElement webElement : listFood) {
+            if (webElement.getText().contains("Kosher")) counter++;
+        }
+        return counter == listFood.size();
+    }
+
+
 }
