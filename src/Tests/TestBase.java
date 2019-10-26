@@ -12,13 +12,15 @@ import java.util.List;
 import org.openqa.selenium.By;
 
 public class TestBase {
-    WebDriver driver;
+    public static final String LOGIN = "karin";
+    public static final String PASSWORD = "12345.com";
+    public WebDriver driver;
     @AfterMethod
     public void tearDown(){
         driver.quit();
     }
     @BeforeMethod
-    public  void  initWebDriver() throws InterruptedException {
+    public  void  initWebDriver() {
         driver = new ChromeDriver();
         driver.get("https://mishpahug.co.il/");
         waitUntilElementIsClickable(By.id("closedIntro"),30);
