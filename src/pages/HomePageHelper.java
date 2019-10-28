@@ -51,7 +51,7 @@ public class HomePageHelper extends PageBase {
                 .xpath("//div[@id='idbtnclearfilter']"),20);
         waitUntilElementIsPresent(By
                 .xpath("//option[@selected][@value = 'Shabbat']"),20);
-        // ------ wait that all events by fiter "shabbat" are loaded ----
+        // ------ wait that all events by filter "shabbat" are loaded ----
         waitUntilAllElementsVisible(driver.findElements(By
                 .xpath("//div[@class = 'itemEventInsert']")),40);
 

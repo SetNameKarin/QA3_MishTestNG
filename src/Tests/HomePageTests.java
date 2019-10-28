@@ -1,4 +1,4 @@
-package tests;
+package Tests;
 
 import Tests.TestBase;
 import org.openqa.selenium.By;

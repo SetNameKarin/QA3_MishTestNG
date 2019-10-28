@@ -42,11 +42,11 @@ public  void lastNameOfFamilyChanging() throws InterruptedException {
 
         //----------------Go to the family page--------------
        profilePage.goToTheFamilyPage();
-        //Assert.assertTrue(driver.findElement(By.id("titleprofile")).getText(). DOES NOT WORK!!!!((((
-               // contains("Petrov"));
+        Assert.assertTrue(driver.findElement(By.id("titleprofile")).getText().contains("Petrov")); //DOES NOT WORK!!!!((((
+
 
         //---------------Return to the profile---------------
-        profilePage.goToTheProfile();
+        profilePage.goToTheProfilePage();
 
 
         //----------------Open in edit mode---------
@@ -63,8 +63,16 @@ public  void lastNameOfFamilyChanging() throws InterruptedException {
     }
 
     @Test
-    public void profileAndFamilyPageComparing() throws InterruptedException {
+    public void profileAndFamilyPageComparing(){
+        profilePage.confessionProfile();
+        profilePage.languagesProfile();
+        profilePage.foodPreferenceProfile();
+        profilePage.EmailProfile();
+        profilePage.phoneNumberProfile();
 
-       Assert.assertTrue(profilePage.profileAndFamilyPageComparing());
+        profilePage.waitingForFamilyIconIsClickable();
+
+        profilePage.goToTheFamilyPage();
+        Assert.assertTrue(profilePage.comparingResults());
     }
  }

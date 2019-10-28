@@ -15,10 +15,12 @@ public class TestBase {
     public static final String LOGIN = "karin";
     public static final String PASSWORD = "12345.com";
     public WebDriver driver;
+
     @AfterMethod
     public void tearDown(){
         driver.quit();
     }
+
     @BeforeMethod
     public  void  initWebDriver() {
         driver = new ChromeDriver();
@@ -26,7 +28,6 @@ public class TestBase {
         waitUntilElementIsClickable(By.id("closedIntro"),30);
         driver.manage().window().fullscreen();
         driver.findElement(By.id("closedIntro")).click();
-       // Thread.sleep(5000);
         waitUntilElementIsClickable(By.id("idsignin"),20);
 
     }
@@ -51,6 +52,8 @@ public class TestBase {
             e.printStackTrace();
         }
     }
+
+
 
     public void waitUntilElementIsPresent(By locator, int time){
         try{
