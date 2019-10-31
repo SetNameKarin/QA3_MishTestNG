@@ -35,8 +35,8 @@ public  void lastNameOfFamilyChanging() throws InterruptedException {
        profilePage.openProfileInEditMode();
        profilePage.lastNameChanging("Petrov");
        profilePage.saveProfile();
-        Assert.assertEquals(driver.findElement(By.linkText("Petrov")).getText(),"Petrov");
-
+       //Assert.assertEquals(driver.findElement(By.linkText("Petrov")).getText(),"Petrov");
+        //Assert.assertEquals("Petrov", profilePage.getFamilyName());
 
         //----------------Go to the family page--------------
        profilePage.goToTheFamilyPage();
@@ -55,7 +55,6 @@ public  void lastNameOfFamilyChanging() throws InterruptedException {
         profilePage.lastNameChanging("Shuster");
         profilePage.saveProfile();
         Assert.assertEquals("Shuster", profilePage.getFamilyName());
-        //Assert.assertTrue(driver.findElement(By.linkText("Shuster")).isDisplayed(),"There is no an element which can be find be linkText('Shuster')");
 
 
 

@@ -66,8 +66,11 @@ public void openProfileInEditMode(){
         return driver.findElement(By.id("fieldobjfamilyName")).getText();
     }
 
+    public void waitingForFamilyIconIsClickable(){
+        waitUntilElementIsClickable(By.id("family"), 30);
 
-            //--------------------Personal information --------------------
+    }
+            //--------------------Personal information for comparing --------------------
             public String confessionProfile(){
 
                 return driver.findElement(By.cssSelector("#fieldobjconfession")).getText();
@@ -97,10 +100,7 @@ public void openProfileInEditMode(){
                 }
 
 
-                public void waitingForFamilyIconIsClickable(){
-                    waitUntilElementIsClickable(By.id("family"), 30);
 
-                }
 
 
 }
