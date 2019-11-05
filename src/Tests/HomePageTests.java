@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -19,7 +20,8 @@ public class HomePageTests extends TestBase {
 
     @BeforeMethod
     public void initTests(){
-        homePage = new HomePageHelper(driver);
+       // homePage = new HomePageHelper(driver);
+        homePage = PageFactory.initElements(driver, HomePageHelper.class);
         homePage.waitUntilPageIsLoaded();
 
     }

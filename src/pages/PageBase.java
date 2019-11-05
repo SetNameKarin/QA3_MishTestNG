@@ -25,6 +25,16 @@ public class PageBase {
             e.printStackTrace();
         }
     }
+
+    public void waitUntilElementIsVisible(WebElement element, int time){
+        try{
+            new WebDriverWait(driver, time)
+                    .until(ExpectedConditions.visibilityOf(element));
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public void waitUntilElementIsPresent(By locator, int time){
         try{
             new WebDriverWait(driver, time)
@@ -33,6 +43,9 @@ public class PageBase {
             e.printStackTrace();
         }
     }
+
+
+
     public void waitUntilAllElementsVisible(List<WebElement> listOptions, int time){
         try{
             new WebDriverWait(driver, time)
@@ -50,6 +63,14 @@ public class PageBase {
             e.printStackTrace();
         }
     }
+    public void waitUntilElementIsClickable(WebElement element, int time){
+        try{
+            new WebDriverWait(driver, time)
+                    .until(ExpectedConditions.elementToBeClickable(element));
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 
     public void waitUntilTextPresentInElement(By locator, String text, int time){
         try{
@@ -59,4 +80,20 @@ public class PageBase {
             e.printStackTrace();
         }
     }
+
+    public void waitUntilTextPresentInElement(WebElement element, String text, int time){
+        try{
+            new WebDriverWait(driver, time)
+                    .until(ExpectedConditions.textToBePresentInElement(element, text));
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void enterValueToField(WebElement field, String text) {
+        field.click();
+        field.clear();
+        field.sendKeys(text);
+    }
+
 }

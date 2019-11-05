@@ -1,6 +1,7 @@
 package Tests;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -15,28 +16,32 @@ public class ProfilePageTests extends TestBase {
 
 
     @BeforeMethod
-    public void initTests() throws InterruptedException {
-        profilePage = new ProfilePageHelper(driver);
-        homePage = new HomePageHelper(driver);
-        loginPage = new LoginPageHelper(driver);
-        homePageAuth = new HomePageAuthHelper(driver);
-        familyPage = new FamilyPageHelper(driver);
+    public void initTests(){
+
+        profilePage = PageFactory.initElements(driver, ProfilePageHelper.class);
+
+        homePage = PageFactory.initElements(driver, HomePageHelper.class);
+
+        loginPage = PageFactory.initElements(driver, LoginPageHelper.class);
+
+        homePageAuth = PageFactory.initElements(driver, HomePageAuthHelper.class);
+
+        familyPage = PageFactory.initElements(driver, FamilyPageHelper.class);
 
         homePage.waitUntilPageIsLoaded();
-        loginPage.openLoginPage();
-        loginPage.loginToTheSystem(LOGIN,PASSWORD);
+        loginPage.openLoginPage()
+                 .loginToTheSystem(LOGIN,PASSWORD);
         homePageAuth.waitUntilPageIsLoaded();
         profilePage.goToTheProfile();
     }
 
     @Test
-public  void lastNameOfFamilyChanging() throws InterruptedException {
+public  void lastNameOfFamilyChanging() {
               //--------------Open in edit mode-------------
-       profilePage.openProfileInEditMode();
-       profilePage.lastNameChanging("Petrov");
-       profilePage.saveProfile();
-       //Assert.assertEquals(driver.findElement(By.linkText("Petrov")).getText(),"Petrov");
-        //Assert.assertEquals("Petrov", profilePage.getFamilyName());
+       profilePage.openProfileInEditMode()
+                  .lastNameChanging("Petrov")
+                  .saveProfile();
+       Assert.assertEquals("Petrov", profilePage.getFamilyName());
 
         //----------------Go to the family page--------------
        profilePage.goToTheFamilyPage();
@@ -44,16 +49,10 @@ public  void lastNameOfFamilyChanging() throws InterruptedException {
 
 
         //---------------Return to the profile---------------
-        profilePage.goToTheProfilePage();
-
-
-        //----------------Open in edit mode---------
-        profilePage.openProfileInEditMode();
-
-        //---------------Enter new last name and save--------------------
-
-        profilePage.lastNameChanging("Shuster");
-        profilePage.saveProfile();
+        profilePage.goToTheProfile()
+                   .openProfileInEditMode()
+                   .lastNameChanging("Shuster")
+                   .saveProfile();
         Assert.assertEquals("Shuster", profilePage.getFamilyName());
 
 
@@ -72,8 +71,8 @@ public  void lastNameOfFamilyChanging() throws InterruptedException {
 
         String phone = profilePage.phoneNumberProfile();
 
-        profilePage.waitingForFamilyIconIsClickable();
-        familyPage.goToTheFamilyPage();
+        profilePage.waitingForFamilyIconIsClickable()
+                   .goToTheFamilyPage();
 
 
         int counter = 0;

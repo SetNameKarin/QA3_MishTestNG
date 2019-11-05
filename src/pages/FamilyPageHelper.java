@@ -3,6 +3,8 @@ package pages;
 import Tests.ProfilePageTests;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class FamilyPageHelper extends PageBase{
 
@@ -11,14 +13,7 @@ public class FamilyPageHelper extends PageBase{
     }
 
 
-    public void goToTheFamilyPage(){
-        driver.findElement(By.id("family")).click();
-        waitUntilElementIsVisible(By.id("idfamilyinfoimg"), 30);
-        waitUntilTextPresentInElement(By.id("titleprofile"), "My Family:", 30);
-
-    }
-
-    public String getTitle(){
+     public String getTitle(){
         return driver.findElement(By.id("titleprofile")).getText();
     }
 

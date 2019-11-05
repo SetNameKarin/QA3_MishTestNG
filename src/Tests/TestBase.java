@@ -54,22 +54,4 @@ public class TestBase {
     }
 
 
-
-    public void waitUntilElementIsPresent(By locator, int time){
-        try{
-            new WebDriverWait(driver, time)
-                    .until(ExpectedConditions.presenceOfElementLocated(locator));
-        } catch(Exception e){
-            e.printStackTrace();
-        }
-    }
-    public void waitUntilAllElementsVisible(List<WebElement> listOptions, int time){
-        try{
-            new WebDriverWait(driver, time)
-                    .until(ExpectedConditions.visibilityOfAllElements(listOptions));
-        } catch(Exception e){
-            e.printStackTrace();
-        }
-    }
-
 }

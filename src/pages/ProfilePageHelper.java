@@ -3,71 +3,79 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class ProfilePageHelper extends PageBase{
+    @FindBy(id = "profile") WebElement profileIcon;
+    @FindBy(id = "idbtneditprofile") WebElement editProfileButton;
+    @FindBy(id = "imgavatarinprofilefamily")WebElement familyAvaInProfile;
+    @FindBy(id = "titleprofile") WebElement titleProfile;
+    @FindBy(xpath = "//span[@id='fieldobjfamilyName']//input") WebElement inputFamilyName;
+    @FindBy(id = "idbtnsaveprofile")WebElement saveButton;
+    @FindBy(id = "family")WebElement familyIcon;
+    @FindBy(id = "idfamilyinfoimg")WebElement familyAvaInFamily;
+    @FindBy(xpath = "//span[@id='fieldobjfamilyName']")WebElement familyName;
 
     public ProfilePageHelper(WebDriver driver) {
         super(driver);
     }
 
 
-public void goToTheProfile(){
-    driver.findElement(By.id("profile")).click();
-
-    waitUntilElementIsClickable(By.xpath(" //div[@id='idbtneditavatar']//div//i[@class='fa fa-plus-circle']"), 30);
-    waitUntilTextPresentInElement(By.id("titleprofile"), "My Profile:", 20);
-    waitUntilElementIsVisible(By.id("imgavatarinprofilefamily"), 20);
-
+public ProfilePageHelper goToTheProfile(){
+    profileIcon.click();
+    waitUntilPageLoaded();
+    return this;
 }
 
-public void openProfileInEditMode(){
+public ProfilePageHelper waitUntilPageLoaded(){
+    waitUntilElementIsClickable(editProfileButton,20);
+    waitUntilTextPresentInElement(titleProfile, "My Profile:", 20 );
+    waitUntilElementIsVisible(familyAvaInProfile, 20);
+        return this;
+}
 
-    driver.findElement(By.id("idbtneditprofile")).click();
-    waitUntilElementIsClickable(By.xpath("//span[@id='fieldobjfamilyName']//input"), 20);
-    waitUntilElementIsClickable(By.id("idbtnsaveprofile"), 20);
+public ProfilePageHelper openProfileInEditMode(){
 
-
+    editProfileButton.click();
+    waitUntilElementIsClickable(inputFamilyName, 20);
+    waitUntilElementIsClickable(saveButton, 20);
+    return this;
 }
 
 
-    public void lastNameChanging(String name) {
+    public ProfilePageHelper lastNameChanging(String name) {
         //----------------Enter new Last name------------
-        WebElement lastNameField = driver.findElement(By.xpath("//span[@id='fieldobjfamilyName']//input"));
-        lastNameField.click();
-        lastNameField.clear();
-        lastNameField.sendKeys(name);
-        waitUntilElementIsVisible(By.id("idbtnsaveprofile"), 30);
-        waitUntilElementIsClickable(By.id("idbtnsaveprofile"), 30);
+        enterValueToField(inputFamilyName, name);
+       waitUntilElementIsVisible(saveButton, 30);
+       waitUntilElementIsClickable(saveButton, 30);
+        return this;
     }
 
 
-        public void saveProfile() {
-            driver.findElement(By.id("idbtnsaveprofile")).click();
-            waitUntilTextPresentInElement(By.xpath("//span[@id='fieldobjfamilyName']"), "Petrov", 20);
-            waitUntilElementIsClickable(By.id("idbtneditprofile"), 30);
-            waitUntilElementIsClickable(By.id("family"), 20);
+        public ProfilePageHelper saveProfile() {
+            saveButton.click();
+
+            waitUntilTextPresentInElement(familyName,"Petrov", 20 );
+            waitUntilElementIsClickable(editProfileButton,30);
+           waitUntilElementIsVisible(familyIcon, 20);
+            return this;
         }
-        public void goToTheFamilyPage(){
-            driver.findElement(By.id("family")).click();
-           waitUntilElementIsVisible(By.id("idfamilyinfoimg"), 30);
-           waitUntilTextPresentInElement(By.id("titleprofile"), "My Family:", 30);
-
+        public ProfilePageHelper goToTheFamilyPage(){
+            familyIcon.click();
+            waitUntilElementIsVisible(familyAvaInFamily, 30);
+            waitUntilTextPresentInElement(titleProfile, "My Family:", 30 );
+           return this;
         }
 
-            public void goToTheProfilePage() {
-            driver.findElement(By.id("profile")).click();
-            waitUntilElementIsClickable(By.xpath(" //div[@id='idbtneditavatar']//div//i[@class='fa fa-plus-circle']"), 30);
-            waitUntilTextPresentInElement(By.id("titleprofile"), "My Profile:", 20);
-            waitUntilElementIsVisible(By.id("imgavatarinprofilefamily"), 20);
 
-              }
 
     public String getFamilyName(){
-        return driver.findElement(By.id("fieldobjfamilyName")).getText();
+        return familyName.getText();
     }
 
-    public void waitingForFamilyIconIsClickable(){
-        waitUntilElementIsClickable(By.id("family"), 30);
+    public ProfilePageHelper waitingForFamilyIconIsClickable(){
+        waitUntilElementIsClickable(familyIcon, 30);
+        return this;
 
     }
             //--------------------Personal information for comparing --------------------
