@@ -8,8 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import java.util.List;
-import org.openqa.selenium.By;
+
 
 public class TestBase {
     public static final String LOGIN = "karin";
@@ -29,18 +28,6 @@ public class TestBase {
         driver.manage().window().fullscreen();
         driver.findElement(By.id("closedIntro")).click();
         waitUntilElementIsClickable(By.id("idsignin"),20);
-
-    }
-
-
-    public void waitUntilElementIsVisible(By locator, int time) {
-        try {
-            new WebDriverWait(driver, time)
-                    .until(ExpectedConditions.visibilityOfElementLocated(locator));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
 
     }
 
