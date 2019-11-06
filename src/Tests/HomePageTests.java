@@ -20,7 +20,6 @@ public class HomePageTests extends TestBase {
 
     @BeforeMethod
     public void initTests(){
-       // homePage = new HomePageHelper(driver);
         homePage = PageFactory.initElements(driver, HomePageHelper.class);
         homePage.waitUntilPageIsLoaded();
 

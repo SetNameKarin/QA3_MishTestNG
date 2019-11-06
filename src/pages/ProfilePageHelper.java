@@ -53,13 +53,15 @@ public ProfilePageHelper openProfileInEditMode(){
 
 
         public ProfilePageHelper saveProfile() {
+            scrollPageUp();
             saveButton.click();
-
             waitUntilTextPresentInElement(familyName,"Petrov", 20 );
             waitUntilElementIsClickable(editProfileButton,30);
            waitUntilElementIsVisible(familyIcon, 20);
             return this;
         }
+
+
         public ProfilePageHelper goToTheFamilyPage(){
             familyIcon.click();
             waitUntilElementIsVisible(familyAvaInFamily, 30);

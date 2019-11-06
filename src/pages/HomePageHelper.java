@@ -50,9 +50,8 @@ public class HomePageHelper extends PageBase {
         waitUntilElementIsClickable(filterHolidays, 30);
         waitUntilAllElementsVisible(driver.findElements(By.xpath("//select[@name = 'selectholidays']/option")),30);
 
-        // ------ choose filter "shabbat" ------
-        Select selector = new Select(filterHolidays);
-        selector.selectByValue("Shabbat");
+        selectValueFromList(filterHolidays, "Shabbat");
+
 
         // ------ wait that filter "shabbat" is chosen -----
         waitUntilElementIsClickable(clearFilterButton,20);
@@ -62,6 +61,8 @@ public class HomePageHelper extends PageBase {
        waitUntilAllElementsVisible(eventsList, 40);
        return  this;
     }
+
+
 
     public Boolean allEventsBelongToHolidayShabbat() {
             // --- verify that all holidays values are "Shabbat" ----
@@ -83,9 +84,9 @@ public class HomePageHelper extends PageBase {
         System.out.println("is displayed: " + driver.findElement(By.xpath("//div[@id='idbtnclearfilter']")).isDisplayed());
         System.out.println("is enabled: " + driver.findElement(By.xpath("//div[@id='idbtnclearfilter']")).isEnabled());
 */
+
         // ------ choose filter "kosher" ------
-        Select selector = new Select(selectFood);
-        selector.selectByValue("Kosher");
+        selectValueFromList(selectFood, "Kosher");
 
         // ------ wait for filter "kosher" being chosen -----
 
