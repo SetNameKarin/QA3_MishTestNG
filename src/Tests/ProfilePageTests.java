@@ -42,7 +42,7 @@ public  void lastNameOfFamilyChanging() {
        Assert.assertEquals("Petrov", profilePage.getFamilyName());
 
         //----------------Go to the family page--------------
-       profilePage.goToTheFamilyPage();
+       familyPage.goToTheFamilyPage();
        Assert.assertEquals("My Family: Petrov", familyPage.getTitle());
 
 
@@ -69,8 +69,8 @@ public  void lastNameOfFamilyChanging() {
 
         String phone = profilePage.phoneNumberProfile();
 
-        profilePage.waitingForFamilyIconIsClickable()
-                   .goToTheFamilyPage();
+        profilePage.waitingForFamilyIconIsClickable();
+        familyPage.goToTheFamilyPage();
 
 
         int counter = 0;

@@ -13,7 +13,6 @@ public class ProfilePageHelper extends PageBase{
     @FindBy(xpath = "//span[@id='fieldobjfamilyName']//input") WebElement inputFamilyName;
     @FindBy(id = "idbtnsaveprofile")WebElement saveButton;
     @FindBy(id = "family")WebElement familyIcon;
-    @FindBy(id = "idfamilyinfoimg")WebElement familyAvaInFamily;
     @FindBy(xpath = "//span[@id='fieldobjfamilyName']")WebElement familyName;
 
     public ProfilePageHelper(WebDriver driver) {
@@ -62,12 +61,6 @@ public ProfilePageHelper openProfileInEditMode(){
         }
 
 
-        public ProfilePageHelper goToTheFamilyPage(){
-            familyIcon.click();
-            waitUntilElementIsVisible(familyAvaInFamily, 30);
-            waitUntilTextPresentInElement(titleProfile, "My Family:", 30 );
-           return this;
-        }
 
 
 

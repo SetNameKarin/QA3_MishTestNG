@@ -7,13 +7,24 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class FamilyPageHelper extends PageBase{
+    @FindBy(id = "titleprofile") WebElement titleProfile;
+    @FindBy(id = "family")WebElement familyIcon;
+    @FindBy(id = "idfamilyinfoimg")WebElement familyAvaInFamily;
 
     public FamilyPageHelper(WebDriver driver) {
         super(driver);
     }
 
+    public FamilyPageHelper goToTheFamilyPage(){
+        familyIcon.click();
+        waitUntilElementIsVisible(familyAvaInFamily, 30);
+        waitUntilTextPresentInElement(titleProfile, "My Family:", 30 );
+        return this;
+    }
 
-     public String getTitle(){
+
+
+    public String getTitle(){
         return driver.findElement(By.id("titleprofile")).getText();
     }
 
